@@ -19,11 +19,15 @@ import { pushEvent, CONTACT_EMAIL, trackContactClick } from "@/lib/analytics";
 
 const FORM_NAME = "inquiry";
 
-// POST to "/", not to public/__forms.html. Netlify's form handler intercepts a
-// POST to any path it serves as HTML, and "/" is verified to work; a POST to
-// /__forms.html returns 404. __forms.html exists to make the form *detectable*
-// on every deploy, not to be posted to.
-const FORM_ENDPOINT = "/";
+// Do NOT post to "/". Measured on deploy-preview-2, every HTML path on the site
+// accepts a form POST and records it — /index.html, /about, /big-long-lake,
+// /__forms.html all return 200 — except the bare "/", which the `/*` catch-all
+// below answers with the 404 shell. That is the single reason this form never
+// delivered: the original code posted to "/".
+//
+// Do not add a redirect rule for this path either. A self-referential rewrite
+// (`from = "/__forms.html"` → `to = "/__forms.html"`) makes it 404 instead.
+const FORM_ENDPOINT = "/__forms.html";
 
 const FORM_CONTEXT = {
   form_id: "inquiry",
