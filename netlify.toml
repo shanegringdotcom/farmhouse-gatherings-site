@@ -18,6 +18,16 @@
   status = 301
   force = true
 
+# The inquiry form POSTs here. This rule has to sit above the `/*` catch-all:
+# Netlify only checks for a matching static file on GET and HEAD, so a POST is
+# handed straight to the redirect rules, and the catch-all below would answer it
+# with the 404 shell instead of letting Netlify Forms record the submission.
+# That is what "the form has never delivered a message" was.
+[[redirects]]
+  from = "/__forms.html"
+  to = "/__forms.html"
+  status = 200
+
 # /welcome is a real client-rendered route, so it must serve the SPA shell with a
 # genuine 200. It stays out of the prerender list (and out of sitemap.xml) on
 # purpose — that is what keeps it noindexed and private.

@@ -19,6 +19,13 @@ import { pushEvent, CONTACT_EMAIL, trackContactClick } from "@/lib/analytics";
 
 const FORM_NAME = "inquiry";
 
+// Netlify only applies static-file precedence to GET/HEAD, so a POST falls
+// through to the redirect rules in netlify.toml — including the `/*` catch-all.
+// Posting to the dedicated form-definition file keeps the submission on a path
+// that exists for Netlify Forms rather than one the SPA fallback owns.
+// See public/__forms.html.
+const FORM_ENDPOINT = "/__forms.html";
+
 const FORM_CONTEXT = {
   form_id: "inquiry",
   form_name: "Booking Inquiry",
@@ -69,17 +76,25 @@ const InquirySection = () => {
 
     setSending(true);
     try {
-      // Netlify Forms: POST the encoded fields back to the site. Netlify
-      // captures the submission (visible in the dashboard + email notifications).
-      const response = await fetch("/", {
+      // Netlify Forms: POST the encoded fields to the form-definition file.
+      // `bot-field` MUST be sent explicitly, even empty: Netlify treats an absent
+      // honeypot field as a filled one and silently drops the submission — no
+      // dashboard entry, no spam entry, no API record. Between 16 July and now
+      // that discard, plus the `/*` catch-all swallowing the POST, is why this
+      // form registered 10 form_submit events in GA4 and delivered nothing.
+      const response = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": FORM_NAME, ...result.data }),
+        body: encode({ "form-name": FORM_NAME, "bot-field": "", ...result.data }),
       });
 
       if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
 
       // Conversion tracking: mark form_submit and generate_lead as Key Events in GA4.
+      // These fire only on a 2xx from the Forms handler. That is the strongest
+      // signal available client-side, but it is not proof of capture — if this
+      // count ever diverges from the Netlify submission count again, trust
+      // Netlify. scripts/leads-client.mjs in client-seo-agent reads both.
       pushEvent("form_submit", { ...FORM_CONTEXT });
       pushEvent("generate_lead", { ...FORM_CONTEXT, currency: "USD", value: 0 });
 
