@@ -19,12 +19,11 @@ import { pushEvent, CONTACT_EMAIL, trackContactClick } from "@/lib/analytics";
 
 const FORM_NAME = "inquiry";
 
-// Netlify only applies static-file precedence to GET/HEAD, so a POST falls
-// through to the redirect rules in netlify.toml — including the `/*` catch-all.
-// Posting to the dedicated form-definition file keeps the submission on a path
-// that exists for Netlify Forms rather than one the SPA fallback owns.
-// See public/__forms.html.
-const FORM_ENDPOINT = "/__forms.html";
+// POST to "/", not to public/__forms.html. Netlify's form handler intercepts a
+// POST to any path it serves as HTML, and "/" is verified to work; a POST to
+// /__forms.html returns 404. __forms.html exists to make the form *detectable*
+// on every deploy, not to be posted to.
+const FORM_ENDPOINT = "/";
 
 const FORM_CONTEXT = {
   form_id: "inquiry",
@@ -76,12 +75,13 @@ const InquirySection = () => {
 
     setSending(true);
     try {
-      // Netlify Forms: POST the encoded fields to the form-definition file.
-      // `bot-field` MUST be sent explicitly, even empty: Netlify treats an absent
-      // honeypot field as a filled one and silently drops the submission — no
-      // dashboard entry, no spam entry, no API record. Between 16 July and now
-      // that discard, plus the `/*` catch-all swallowing the POST, is why this
-      // form registered 10 form_submit events in GA4 and delivered nothing.
+      // Netlify Forms accepts this POST only when the deploy serving it carries
+      // a detectable form definition. The 3 Aug production build did not, which
+      // is why a POST to "/" there returns Netlify's "Thank you!" page with a
+      // 200 and then discards the submission — a silent success that produced
+      // 10 form_submit events in GA4 and zero enquiries. public/__forms.html is
+      // a static file, so it is scanned on every deploy and the definition can
+      // no longer go missing. bot-field is sent for field-list parity.
       const response = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
