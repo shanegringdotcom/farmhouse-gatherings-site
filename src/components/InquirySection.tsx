@@ -19,6 +19,16 @@ import { pushEvent, CONTACT_EMAIL, trackContactClick } from "@/lib/analytics";
 
 const FORM_NAME = "inquiry";
 
+// Do NOT post to "/". Measured on deploy-preview-2, every HTML path on the site
+// accepts a form POST and records it — /index.html, /about, /big-long-lake,
+// /__forms.html all return 200 — except the bare "/", which the `/*` catch-all
+// below answers with the 404 shell. That is the single reason this form never
+// delivered: the original code posted to "/".
+//
+// Do not add a redirect rule for this path either. A self-referential rewrite
+// (`from = "/__forms.html"` → `to = "/__forms.html"`) makes it 404 instead.
+const FORM_ENDPOINT = "/__forms.html";
+
 const FORM_CONTEXT = {
   form_id: "inquiry",
   form_name: "Booking Inquiry",
@@ -69,17 +79,26 @@ const InquirySection = () => {
 
     setSending(true);
     try {
-      // Netlify Forms: POST the encoded fields back to the site. Netlify
-      // captures the submission (visible in the dashboard + email notifications).
-      const response = await fetch("/", {
+      // Netlify Forms accepts this POST only when the deploy serving it carries
+      // a detectable form definition. The 3 Aug production build did not, which
+      // is why a POST to "/" there returns Netlify's "Thank you!" page with a
+      // 200 and then discards the submission — a silent success that produced
+      // 10 form_submit events in GA4 and zero enquiries. public/__forms.html is
+      // a static file, so it is scanned on every deploy and the definition can
+      // no longer go missing. bot-field is sent for field-list parity.
+      const response = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ "form-name": FORM_NAME, ...result.data }),
+        body: encode({ "form-name": FORM_NAME, "bot-field": "", ...result.data }),
       });
 
       if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
 
       // Conversion tracking: mark form_submit and generate_lead as Key Events in GA4.
+      // These fire only on a 2xx from the Forms handler. That is the strongest
+      // signal available client-side, but it is not proof of capture — if this
+      // count ever diverges from the Netlify submission count again, trust
+      // Netlify. scripts/leads-client.mjs in client-seo-agent reads both.
       pushEvent("form_submit", { ...FORM_CONTEXT });
       pushEvent("generate_lead", { ...FORM_CONTEXT, currency: "USD", value: 0 });
 

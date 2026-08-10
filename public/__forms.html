@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Netlify form definitions</title>
+  </head>
+  <body>
+    <!--
+      Netlify detects forms by parsing the static HTML in the publish directory at
+      build time, and it needs a stable, real path to accept the POST against.
+
+      The React form in src/components/InquirySection.tsx submits by fetch(), so
+      this file is the thing Netlify actually reads and the thing the fetch() posts
+      to. Keeping the definition here rather than relying on the prerendered
+      homepage means form detection no longer depends on scripts/prerender.mjs
+      continuing to emit the form into dist/index.html.
+
+      The field list must stay in sync with InquirySection.tsx. bot-field is the
+      honeypot named by netlify-honeypot on the React form; it must be declared
+      here AND sent (empty) in the POST body, because Netlify silently discards a
+      submission whose honeypot field is absent rather than empty — those
+      discards never appear in the dashboard, in spam, or in the API, which is
+      why this form read as "nothing ever arrived".
+    -->
+    <form name="inquiry" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="inquiry" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="dates" />
+      <input type="text" name="group" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

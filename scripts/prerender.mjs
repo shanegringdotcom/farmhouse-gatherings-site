@@ -297,9 +297,18 @@ const routes = [
     out: "index.html",
     // Keep in sync with index.html — these values overwrite the ones in the
     // shell for the built homepage.
-    title: "Big Long Lake Vacation Rental, Indiana | Sleeps 12, Private Dock",
+    // The 1-7 Aug report: 98 impressions at average position 8.8 and zero
+    // clicks, second week running. Page-one visibility that never converts is a
+    // listing problem, not a ranking one — at position 6.8 the searcher is
+    // reading this title against Airbnb and VRBO results that show a price and a
+    // Book button, and picking one of those instead. Both lines now carry an
+    // explicit booking cue. Keep the lake name first (it is the query), and keep
+    // capacity and the dock — they are what a group of 12 is actually filtering
+    // on. Title is 54 chars and the description 155, so neither gets truncated
+    // and the booking cue survives into the listing.
+    title: "Big Long Lake Rental, Indiana — Sleeps 12, Book Direct",
     description:
-      "Lakefront vacation rental on Big Long Lake in Wolcottville, Indiana. Sleeps 12 in 4 bedrooms and 2 baths, with a full kitchen and a private dock.",
+      "Lakefront house on Big Long Lake, Wolcottville, Indiana. Sleeps 12 in 4 bedrooms, full kitchen, private dock. Book direct — send dates, we reply in 24 hours.",
     home: true,
   },
   {
