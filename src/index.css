@@ -82,14 +82,16 @@ html {
    decorations inside them are absolutely positioned (CLS safeguard).
 --------------------------------------------------------------------------- */
 @layer utilities {
-  /* Fractal-noise grain shared by cork and paper. ~500 bytes inline. */
+  /* Cork: warm base + coarse mottled "chip" turbulence (overlay) + fine grain
+     (multiply) + soft vignettes. All inline data-URI SVG — no requests. */
   .bg-corkboard {
-    background-color: hsl(28 40% 56%);
+    background-color: hsl(27 46% 54%);
     background-image:
-      radial-gradient(ellipse at 20% 15%, hsl(30 45% 62% / 0.55), transparent 55%),
-      radial-gradient(ellipse at 85% 80%, hsl(24 40% 42% / 0.5), transparent 60%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-    background-blend-mode: normal, normal, multiply;
+      radial-gradient(ellipse at 20% 15%, hsl(30 50% 62% / 0.4), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, hsl(24 42% 40% / 0.45), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.14' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)' opacity='0.55'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    background-blend-mode: normal, normal, overlay, multiply;
   }
 
   .bg-paper {
