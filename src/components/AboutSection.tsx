@@ -1,5 +1,6 @@
 import houseImg from "@/assets/houses-from-lake.webp";
 import backyardImg from "@/assets/backyard.webp";
+import familyShorelineImg from "@/assets/family-shoreline.webp";
 import BoardPanel from "@/components/board/BoardPanel";
 import TornSheet from "@/components/board/TornSheet";
 import Polaroid from "@/components/board/Polaroid";
@@ -64,6 +65,19 @@ const AboutSection = () => (
           draggable
           width={1280}
           height={852}
+        />
+        <Polaroid
+          src={familyShorelineImg}
+          alt="Three generations of the Gring family on the shoreline at Big Long Lake"
+          caption="a place to gather — proof"
+          rotate={2}
+          fastener="pin"
+          pinColor="yellow"
+          draggable
+          imgClassName="aspect-[3/4]"
+          width={1280}
+          height={1920}
+          className="col-span-2 lg:col-span-1 max-w-xs mx-auto lg:max-w-none"
         />
       </div>
     </div>
