@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BigLongLakeMap from "@/components/BigLongLakeMap";
+import { mapsUrl } from "@/data/ice-cream";
 import lakeImg from "@/assets/houses-from-lake.webp";
 import dockImg from "@/assets/dock.webp";
 import deckLakeImg from "@/assets/deck-lake.webp";
@@ -214,6 +216,51 @@ const BigLongLake = () => {
                 kayaking before the summer crowds arrive.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Public access & lake map */}
+        <section id="public-access" className="py-20 sm:py-28 px-6 bg-surface-warm">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] text-center mb-4">
+              Public Access &amp; Getting on the Lake
+            </h2>
+            <p className="font-body text-[#2b2520]/50 text-center mb-14 text-base sm:text-lg">
+              Where to launch a boat, and the rules of the water once you&rsquo;re out.
+            </p>
+            <div className="space-y-5 font-body text-[#2b2520]/70 text-base sm:text-lg leading-relaxed mb-12">
+              <p>
+                Staying at The Farmhouse, you don&rsquo;t need a ramp at all — the
+                private dock puts you straight on the water. But if you&rsquo;re
+                trailering your own boat, Big Long Lake has a public access site:
+                the launch at{" "}
+                <a
+                  href={mapsUrl("Big Long Lake Public Access Launch, 9555 E 600 S, Wolcottville, IN 46795")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-secondary/40 underline-offset-4 hover:decoration-secondary transition-colors"
+                >
+                  9555 E 600 S, Wolcottville
+                </a>
+                , at the north end of the lake.
+              </p>
+              <p>
+                The ramp puts in on a quiet channel off the main water, so
+                launching is calm even when the lake is busy. The trade-off is
+                size: the parking area is small and the channel is snug, which
+                suits fishing boats and runabouts better than big rigs. On
+                summer Saturdays, arrive early for a parking spot.
+              </p>
+              <p>
+                Once you&rsquo;re out, the lake association&rsquo;s rules are
+                simple: boat traffic runs counterclockwise, boats keep 200 feet
+                off shore except when entering or leaving, and between sunset
+                and sunrise it&rsquo;s idle speed only. The water under you is
+                spring-fed and deep — around 30 feet on average, and past 80
+                feet at the deepest point.
+              </p>
+            </div>
+            <BigLongLakeMap />
           </div>
         </section>
 

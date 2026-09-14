@@ -47,7 +47,7 @@ const guideJsonLd = [
     url: `${SITE}/big-long-lake`,
     name: "Big Long Lake Guide",
     description:
-      "A guide to Big Long Lake in Wolcottville, Indiana — swimming, boating, fishing, kayaking, seasonal events, and staying lakefront at The Farmhouse.",
+      "A guide to Big Long Lake in Wolcottville, Indiana — swimming, boating, fishing, kayaking, the public access boat launch, a lake map, seasonal events, and staying lakefront at The Farmhouse.",
     isPartOf: { "@id": `${SITE}/#website` },
     about: { "@id": `${SITE}/big-long-lake#lake` },
     primaryImageOfPage: `${SITE}/images/houses-from-lake.webp`,
@@ -65,7 +65,10 @@ const guideJsonLd = [
       addressRegion: "IN",
       addressCountry: "US",
     },
-    geo: { "@type": "GeoCoordinates", latitude: 41.5339, longitude: -85.3564 },
+    // The lake itself (OSM water polygon centre), not the house — the house
+    // stays town-level everywhere public.
+    geo: { "@type": "GeoCoordinates", latitude: 41.5577, longitude: -85.2367 },
+    publicAccess: true,
   },
 ];
 
@@ -328,7 +331,7 @@ const routes = [
     out: "big-long-lake.html",
     title: "Big Long Lake Guide | Things to Do, Fishing & Events, Wolcottville IN",
     description:
-      "A guide to Big Long Lake in Wolcottville, Indiana — swimming, boating, fishing, kayaking, seasonal events, and staying lakefront at The Farmhouse.",
+      "A guide to Big Long Lake in Wolcottville, Indiana — swimming, boating, fishing, kayaking, the public access boat launch, a lake map, seasonal events, and staying lakefront at The Farmhouse.",
     jsonLd: guideJsonLd,
   },
   {
