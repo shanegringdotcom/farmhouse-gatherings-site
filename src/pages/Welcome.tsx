@@ -42,6 +42,10 @@ import {
   Beef,
   Sun,
 } from "lucide-react";
+import TornSheet from "@/components/board/TornSheet";
+import PushPin from "@/components/board/PushPin";
+import Tape from "@/components/board/Tape";
+import MeritPatch from "@/components/board/MeritPatch";
 import deckLakeImg from "@/assets/deck-lake.webp";
 import backyardImg from "@/assets/backyard.webp";
 import livingRoomImg from "@/assets/living-room-wide.webp";
@@ -256,50 +260,57 @@ const Welcome = () => {
   );
 
   return (
-    <div className="bg-surface-warm min-h-screen">
+    <div className="bg-corkboard min-h-screen">
       {/* Minimal private header — no marketing nav */}
-      <header className="bg-surface-warm border-b border-[#2b2520]/10">
+      <header>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-          <span className="font-display text-lg sm:text-xl italic text-[#2b2520] tracking-tight">
+          <span
+            className="font-hand text-2xl font-bold text-[#2b2520] [text-shadow:0_1px_0_rgba(255,255,255,0.25)]"
+            style={{ transform: "rotate(-2deg)" }}
+          >
             The Farmhouse
           </span>
-          <span className="text-xs font-body uppercase tracking-[0.2em] text-[#2b2520]/40">
+          <span className="font-typed text-[11px] font-bold uppercase tracking-wide bg-[#f2e8d5] px-3 pt-2 pb-1.5 shadow-pinned rotate-1 text-[#2b2520]">
             Guest Guide
           </span>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative h-[50vh] min-h-[380px] flex items-center justify-center">
-        <div className="absolute inset-4 sm:inset-6 rounded-3xl overflow-hidden">
-          <img
-            src={deckLakeImg}
-            alt="View of Big Long Lake from the deck"
-            className="w-full h-full object-cover"
-            loading="eager"
-            width={1280}
-            height={853}
-          />
-          <div className="absolute inset-0 bg-black/45" />
-        </div>
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[0.95] mb-5">
+      {/* Hero: the welcome poster, stapled to the board */}
+      <section className="relative flex items-center justify-center px-4 sm:px-6 pt-6 pb-8">
+        <div
+          className="relative w-full max-w-3xl bg-paper shadow-lifted px-5 pt-8 pb-7 sm:px-10 sm:pt-10 sm:pb-8 text-center"
+          style={{ transform: "rotate(-0.5deg)" }}
+        >
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-[#2b2520] leading-[0.95] mb-6">
             Welcome to the Farmhouse
           </h1>
-          <p className="font-body text-white/85 text-base sm:text-lg mb-4">
+          <div className="relative mb-6">
+            <Tape className="-top-3 -left-4" rotate={-38} />
+            <Tape className="-top-3 -right-4" rotate={38} />
+            <img
+              src={deckLakeImg}
+              alt="View of Big Long Lake from the deck"
+              className="w-full aspect-[3/2] object-cover border-[6px] border-white shadow-pinned"
+              loading="eager"
+              width={1280}
+              height={853}
+            />
+          </div>
+          <p className="font-body text-[#2b2520]/70 text-base sm:text-lg mb-4">
             Built in 1895, this was the original house on Big Long Lake — and
             after 130 years, it's still the best seat on the water. We're so
             glad you're here.
           </p>
-          <p className="font-body text-white/70 text-sm sm:text-base flex items-center justify-center gap-2">
-            <MapPin size={15} className="shrink-0" />
+          <p className="font-hand text-xl sm:text-2xl text-[#2b2520]/75 flex items-center justify-center gap-2" style={{ transform: "rotate(-1deg)" }}>
+            <MapPin size={17} className="shrink-0 text-secondary" />
             5688 S. 980 E., Wolcottville, IN 46795 &middot; Lane 2L
           </p>
         </div>
       </section>
 
       {/* Mobile section nav — sticky chips */}
-      <nav className="lg:hidden sticky top-0 z-40 bg-surface-warm/95 backdrop-blur-md border-b border-[#2b2520]/10">
+      <nav className="lg:hidden sticky top-0 z-40 bg-[#f2e8d5]/95 backdrop-blur-md shadow-pinned">
         <div className="flex gap-2 overflow-x-auto px-4 py-3 [-webkit-overflow-scrolling:touch]">
           {sections.map((s) => navLink(s, true))}
         </div>
@@ -307,16 +318,29 @@ const Welcome = () => {
 
       {/* Body: side nav + sections */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:grid lg:grid-cols-[220px_1fr] lg:gap-16">
-        {/* Desktop side nav */}
+        {/* Desktop side nav — an index card pinned beside the sheets */}
         <aside className="hidden lg:block">
-          <nav className="sticky top-12 space-y-1">
+          <nav
+            className="sticky top-12 space-y-1 relative bg-[#fbf8ee] shadow-pinned px-4 pt-7 pb-5"
+            style={{ transform: "rotate(-0.8deg)" }}
+          >
+            <PushPin color="navy" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
             {sections.map((s) => navLink(s))}
           </nav>
         </aside>
 
-        <main className="max-w-2xl space-y-20 sm:space-y-24">
+        <main className="max-w-2xl space-y-14 sm:space-y-16">
           {/* ————— Arrival ————— */}
           <section id="arrival" className="scroll-mt-24">
+            <TornSheet variant="cream" rotate={-0.4} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="red" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
+            <MeritPatch
+              icon="boat"
+              label="Boating merit patch"
+              felt="teal"
+              rotate={8}
+              className="absolute -top-6 -right-3 hidden sm:block pointer-events-none z-10"
+            />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-6">
               Arrival
             </h2>
@@ -326,8 +350,9 @@ const Welcome = () => {
               area just before the house.
             </p>
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
-              <figure>
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden">
+              <figure className="relative bg-white p-2.5 pb-2 shadow-pinned -rotate-1">
+                <Tape className="-top-3 left-1/2 -ml-12" rotate={-5} />
+                <div className="aspect-[3/4] overflow-hidden">
                   <img
                     src={arrivalLaneImg}
                     alt="The gravel lane down to the house, marked with a red arrow"
@@ -337,12 +362,13 @@ const Welcome = () => {
                     height={1334}
                   />
                 </div>
-                <figcaption className="mt-2 font-body text-sm text-[#2b2520]/50 text-center">
+                <figcaption className="pt-2 font-hand text-lg text-[#2b2520]/75 text-center">
                   Follow the lane down toward the lake
                 </figcaption>
               </figure>
-              <figure>
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden">
+              <figure className="relative bg-white p-2.5 pb-2 shadow-pinned rotate-1">
+                <Tape className="-top-3 left-1/2 -ml-12" rotate={4} />
+                <div className="aspect-[3/4] overflow-hidden">
                   <img
                     src={parkingAreaImg}
                     alt="The gravel parking area with a red arrow pointing to the house"
@@ -352,7 +378,7 @@ const Welcome = () => {
                     height={1334}
                   />
                 </div>
-                <figcaption className="mt-2 font-body text-sm text-[#2b2520]/50 text-center">
+                <figcaption className="pt-2 font-hand text-lg text-[#2b2520]/75 text-center">
                   Park here — the house is just beyond
                 </figcaption>
               </figure>
@@ -379,10 +405,13 @@ const Welcome = () => {
                 </p>
               </div>
             </div>
+            </TornSheet>
           </section>
 
           {/* ————— The Essentials ————— */}
           <section id="essentials" className="scroll-mt-24">
+            <TornSheet variant="white" rotate={0.5} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="yellow" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-6">
               The Essentials
             </h2>
@@ -433,10 +462,16 @@ const Welcome = () => {
                 </p>
               </div>
             </div>
+            </TornSheet>
           </section>
 
           {/* ————— House Rules ————— */}
           <section id="rules" className="scroll-mt-24">
+            <TornSheet variant="cream" rotate={-0.5} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="navy" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
+            <p className="font-marker text-xl text-[#b3402f] uppercase mb-1" aria-hidden="true">
+              Camp Rules
+            </p>
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-6">
               House Rules
             </h2>
@@ -481,10 +516,20 @@ const Welcome = () => {
                 </p>
               </div>
             </div>
+            </TornSheet>
           </section>
 
           {/* ————— Around the House ————— */}
           <section id="house" className="scroll-mt-24">
+            <TornSheet variant="white" rotate={0.4} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="green" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
+            <MeritPatch
+              icon="campfire"
+              label="Campfire merit patch"
+              felt="mustard"
+              rotate={-8}
+              className="absolute -top-6 -right-3 hidden sm:block pointer-events-none z-10"
+            />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-4">
               Around the House
             </h2>
@@ -492,7 +537,7 @@ const Welcome = () => {
               This house is quirky and old — that's the charm we love! A few
               things to know:
             </p>
-            <div className="aspect-[16/10] overflow-hidden rounded-2xl mb-8">
+            <div className="aspect-[16/10] overflow-hidden border-[6px] border-white shadow-pinned mb-8">
               <img
                 src={livingRoomImg}
                 alt="The Farmhouse living room"
@@ -524,10 +569,13 @@ const Welcome = () => {
                 </li>
               ))}
             </ul>
+            </TornSheet>
           </section>
 
           {/* ————— The Neighbors ————— */}
           <section id="neighbors" className="scroll-mt-24">
+            <TornSheet variant="cream" rotate={-0.6} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="red" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-6">
               The Neighbors
             </h2>
@@ -549,10 +597,20 @@ const Welcome = () => {
                 </p>
               </div>
             </div>
+            </TornSheet>
           </section>
 
           {/* ————— Things to Do ————— */}
           <section id="area" className="scroll-mt-24">
+            <TornSheet variant="white" rotate={0.5} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="yellow" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
+            <MeritPatch
+              icon="icecream"
+              label="Ice cream merit patch"
+              felt="brick"
+              rotate={9}
+              className="absolute -top-6 -right-3 hidden sm:block pointer-events-none z-10"
+            />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-4">
               Things to Do
             </h2>
@@ -560,7 +618,7 @@ const Welcome = () => {
               Our favorite local spots — and there's a binder on the table with
               even more.
             </p>
-            <div className="aspect-[16/10] overflow-hidden rounded-2xl mb-2">
+            <div className="aspect-[16/10] overflow-hidden border-[6px] border-white shadow-pinned mb-2">
               <img
                 src={lakeYardImg}
                 alt="The yard leading down to Big Long Lake"
@@ -620,14 +678,17 @@ const Welcome = () => {
                 </li>
               ))}
             </ul>
+            </TornSheet>
           </section>
 
           {/* ————— A Little History ————— */}
           <section id="history" className="scroll-mt-24">
+            <TornSheet variant="cream" rotate={-0.4} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="navy" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-6">
               A Little History
             </h2>
-            <div className="aspect-[16/10] overflow-hidden rounded-2xl mb-8">
+            <div className="aspect-[16/10] overflow-hidden border-[6px] border-white shadow-pinned mb-8">
               <img
                 src={housesFromLakeImg}
                 alt="The Farmhouse seen from Big Long Lake"
@@ -652,10 +713,14 @@ const Welcome = () => {
                 dock still catches the evening light.
               </p>
             </div>
+            </TornSheet>
           </section>
 
           {/* ————— Checkout ————— */}
           <section id="checkout" className="scroll-mt-24">
+            <TornSheet variant="legal" ruled rotate={0.6} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="yellow" className="absolute -top-3.5 left-8" />
+            <PushPin color="red" className="absolute -top-3.5 right-8" />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-2">
               Checkout
             </h2>
@@ -675,13 +740,16 @@ const Welcome = () => {
                 </li>
               ))}
             </ul>
-            <p className="mt-8 font-body text-[#2b2520]/70 text-base sm:text-lg leading-relaxed">
+            <p className="mt-8 font-hand text-2xl text-[#2b2520]/75" style={{ transform: "rotate(-1deg)" }}>
               Thanks for staying with us. We hope you had a wonderful stay!
             </p>
+            </TornSheet>
           </section>
 
           {/* ————— Contact ————— */}
           <section id="contact" className="scroll-mt-24">
+            <TornSheet variant="cream" rotate={-0.5} className="px-5 py-8 sm:px-8 sm:py-10">
+            <PushPin color="green" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#2b2520] mb-6">
               Contact Us
             </h2>
@@ -689,11 +757,12 @@ const Welcome = () => {
               Please contact us immediately if you have any problems during your
               stay. Questions anytime — just text or call.
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-6">
               <a
                 href="tel:303-619-5099"
-                className="rounded-2xl border border-[#2b2520]/15 p-6 hover:border-secondary transition-colors"
+                className="relative bg-[#fbf8ee] shadow-pinned p-6 pt-7 -rotate-1 hover:rotate-0 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
               >
+                <PushPin color="red" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
                 <div className="flex items-center gap-2 mb-2 text-secondary">
                   <Phone size={16} />
                   <span className="font-body text-xs uppercase tracking-[0.15em]">
@@ -707,8 +776,9 @@ const Welcome = () => {
               </a>
               <a
                 href="tel:734-660-5947"
-                className="rounded-2xl border border-[#2b2520]/15 p-6 hover:border-secondary transition-colors"
+                className="relative bg-[#fbf8ee] shadow-pinned p-6 pt-7 rotate-1 hover:rotate-0 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
               >
+                <PushPin color="navy" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
                 <div className="flex items-center gap-2 mb-2 text-secondary">
                   <MessageCircle size={16} />
                   <span className="font-body text-xs uppercase tracking-[0.15em]">
@@ -721,18 +791,23 @@ const Welcome = () => {
                 <p className="font-body text-[#2b2520]/70">734-660-5947</p>
               </a>
             </div>
+            </TornSheet>
           </section>
 
-          <footer className="pt-8 border-t border-[#2b2520]/10">
-            <div className="aspect-[16/9] overflow-hidden rounded-2xl mb-8">
-              <img
-                src={backyardImg}
-                alt="The Farmhouse backyard"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+          <footer className="pt-4">
+            <div className="relative bg-white p-3 pb-2 shadow-pinned rotate-1 mb-6">
+              <Tape className="-top-3 -left-4" rotate={-38} />
+              <Tape className="-top-3 -right-4" rotate={38} />
+              <div className="aspect-[16/9] overflow-hidden">
+                <img
+                  src={backyardImg}
+                  alt="The Farmhouse backyard"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
-            <p className="font-body text-sm text-[#2b2520]/40 text-center">
+            <p className="font-hand text-2xl text-[#3a2a18] text-center" style={{ transform: "rotate(-1deg)" }}>
               We wish you a comfortable and fun stay! — Shane, Scott &amp; Family
             </p>
           </footer>

@@ -1,11 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1e1c1b"/>
-  <!-- farmhouse -->
-  <rect x="40.5" y="13" width="5.5" height="10" fill="#f4ede1"/>
-  <path d="M32 9 L52 28.5 H12 Z" fill="#f4ede1"/>
-  <rect x="17" y="27" width="30" height="15" fill="#f4ede1"/>
-  <rect x="28.5" y="31.5" width="7" height="10.5" rx="1" fill="#1e1c1b"/>
-  <!-- lake -->
-  <path d="M9 49 Q14.75 44.5 20.5 49 T32 49 T43.5 49 T55 49" fill="none" stroke="#e8582c" stroke-width="3.5" stroke-linecap="round"/>
-  <path d="M18 56.5 Q23 52.5 28 56.5 T38 56.5 T46 56.5" fill="none" stroke="#e8582c" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Boating merit patch — the site's badge, from the bulletin-board design -->
+  <path d="M 60.00 8.00 A 8.2 8.2 0 0 1 74.65 10.11 A 8.2 8.2 0 0 1 88.11 16.25 A 8.2 8.2 0 0 1 99.30 25.95 A 8.2 8.2 0 0 1 107.30 38.40 A 8.2 8.2 0 0 1 111.47 52.60 A 8.2 8.2 0 0 1 111.47 67.40 A 8.2 8.2 0 0 1 107.30 81.60 A 8.2 8.2 0 0 1 99.30 94.05 A 8.2 8.2 0 0 1 88.11 103.75 A 8.2 8.2 0 0 1 74.65 109.89 A 8.2 8.2 0 0 1 60.00 112.00 A 8.2 8.2 0 0 1 45.35 109.89 A 8.2 8.2 0 0 1 31.89 103.75 A 8.2 8.2 0 0 1 20.70 94.05 A 8.2 8.2 0 0 1 12.70 81.60 A 8.2 8.2 0 0 1 8.53 67.40 A 8.2 8.2 0 0 1 8.53 52.60 A 8.2 8.2 0 0 1 12.70 38.40 A 8.2 8.2 0 0 1 20.70 25.95 A 8.2 8.2 0 0 1 31.89 16.25 A 8.2 8.2 0 0 1 45.35 10.11 A 8.2 8.2 0 0 1 60.00 8.00 Z" fill="#2e5f66" stroke="#16333a" stroke-width="1"/>
+  <circle cx="60" cy="60" r="46" fill="none" stroke="#9fd0d4" stroke-width="3.5" stroke-dasharray="1.6 3"/>
+  <circle cx="60" cy="60" r="46" fill="none" stroke="#16333a" stroke-width="1" opacity="0.3"/>
+  <g stroke="#e8f4f2" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="translate(60 60) scale(1.55) translate(-40 -38)">
+    <path d="M40 18 V44"/>
+    <path d="M40 20 L55 42 H40 Z" fill="#e8f4f2" fill-opacity="0.2"/>
+    <path d="M40 20 L55 42 H40 Z"/>
+    <path d="M37 27 L26 42 H37 Z"/>
+    <path d="M23 48 H57 L50 58 H30 Z" fill="#e8f4f2" fill-opacity="0.2"/>
+    <path d="M23 48 H57 L50 58 H30 Z"/>
+  </g>
 </svg>
