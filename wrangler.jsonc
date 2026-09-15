@@ -23,13 +23,12 @@
 
   // No *.workers.dev host and no preview URLs in production — the Netlify-era
   // duplicate-host problem (biglongfarmhouse.netlify.app) solved by absence.
-  // CUTOVER: flip workers_dev to false and uncomment the routes below.
-  "workers_dev": true,
+  "workers_dev": false,
   "preview_urls": false,
-  // "routes": [
-  //   { "pattern": "biglongfarmhouse.com", "custom_domain": true },
-  //   { "pattern": "www.biglongfarmhouse.com", "custom_domain": true }
-  // ],
+  "routes": [
+    { "pattern": "biglongfarmhouse.com", "custom_domain": true },
+    { "pattern": "www.biglongfarmhouse.com", "custom_domain": true }
+  ],
 
   "d1_databases": [
     {
