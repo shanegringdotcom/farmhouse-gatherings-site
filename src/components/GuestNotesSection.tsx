@@ -32,7 +32,6 @@ const notes: {
   },
 ];
 
-const openSpots = [{ rotate: -1, label: "this spot's saved for your crew" }];
 
 const GuestNotesSection = () => (
   <BoardPanel id="guest-notes">
@@ -48,7 +47,7 @@ const GuestNotesSection = () => (
       Notes left behind by the families who stayed.
     </p>
 
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 max-w-4xl mx-auto items-start">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 max-w-3xl mx-auto items-start">
       {notes.map((n) => (
         <TornSheet key={n.name + n.date} variant={n.variant} rotate={n.rotate} className="px-6 pt-8 pb-7">
           <PushPin color={n.pin} className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
@@ -63,21 +62,6 @@ const GuestNotesSection = () => (
         </TornSheet>
       ))}
 
-      {openSpots.map((s) => (
-        <a
-          key={s.label}
-          href="#inquire"
-          className="group block border-[3px] border-dashed border-[#5a4222]/40 px-6 pt-8 pb-7 text-center hover:border-[#b3402f]/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
-          style={{ transform: `rotate(${s.rotate}deg)` }}
-        >
-          <p className="font-hand text-2xl leading-snug text-[#3a2a18]/75 mb-3">
-            {s.label}
-          </p>
-          <p className="font-typed text-xs font-bold uppercase tracking-[0.15em] text-[#b3402f] group-hover:underline underline-offset-4">
-            book your week →
-          </p>
-        </a>
-      ))}
     </div>
   </BoardPanel>
 );
