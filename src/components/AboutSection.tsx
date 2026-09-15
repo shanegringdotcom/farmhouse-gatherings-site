@@ -1,6 +1,8 @@
 import houseImg from "@/assets/houses-from-lake.webp";
 import backyardImg from "@/assets/backyard.webp";
 import familyShorelineImg from "@/assets/family-shoreline.webp";
+import twinsLawnImg from "@/assets/twins-lawn.webp";
+import twirlImg from "@/assets/twirl-shoreline.webp";
 import BoardPanel from "@/components/board/BoardPanel";
 import TornSheet from "@/components/board/TornSheet";
 import Polaroid from "@/components/board/Polaroid";
@@ -10,10 +12,11 @@ import PushPin from "@/components/board/PushPin";
 const AboutSection = () => (
   <BoardPanel id="about">
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-8 items-start">
+      <div className="lg:col-span-3">
       <TornSheet
         variant="cream"
         rotate={-0.8}
-        className="lg:col-span-3 px-6 py-9 sm:px-10 sm:py-12"
+        className="px-6 py-9 sm:px-10 sm:py-12"
       >
         <PushPin color="navy" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
         <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#2b2520] mb-8">
@@ -45,6 +48,34 @@ const AboutSection = () => (
           — see you at the dock
         </p>
       </TornSheet>
+
+      {/* Snapshots tacked up right under the letter */}
+      <div className="grid grid-cols-2 gap-8 sm:gap-10 mt-12">
+        <Polaroid
+          src={twinsLawnImg}
+          alt="Two toddlers in sun hats sitting on the lawn in front of The Farmhouse"
+          caption="the littlest campers, reporting for duty"
+          rotate={-2.2}
+          fastener="tape"
+          draggable
+          imgClassName="aspect-[3/4]"
+          width={1280}
+          height={1707}
+        />
+        <Polaroid
+          src={twirlImg}
+          alt="A girl twirling in a dress on the lakefront lawn at golden hour"
+          caption="golden hour twirls by the dock"
+          rotate={1.8}
+          fastener="pin"
+          pinColor="red"
+          draggable
+          imgClassName="aspect-[3/4]"
+          width={1280}
+          height={1707}
+        />
+      </div>
+      </div>
 
       <div className="lg:col-span-2 grid grid-cols-2 lg:grid-cols-1 gap-8 lg:gap-12 lg:pt-6">
         <Polaroid

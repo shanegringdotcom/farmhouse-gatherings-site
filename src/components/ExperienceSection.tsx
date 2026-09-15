@@ -4,8 +4,6 @@ import diningImg from "@/assets/dining-room.webp";
 import livingImg from "@/assets/living-room.webp";
 import kitchenImg from "@/assets/kitchen.webp";
 import livingWideImg from "@/assets/living-room-wide.webp";
-import twinsLawnImg from "@/assets/twins-lawn.webp";
-import twirlImg from "@/assets/twirl-shoreline.webp";
 import BoardPanel from "@/components/board/BoardPanel";
 import StampHeading from "@/components/board/StampHeading";
 import TornSheet from "@/components/board/TornSheet";
@@ -31,8 +29,6 @@ const snapshots: {
   { img: bunkImg, alt: "Bunk room with nautical decor", caption: "Bunk Rooms (cousins' quarters)", rotate: 2.2, fastener: "pin", pinColor: "green" },
   { img: kidsRoomImg, alt: "Kids room with twin beds", caption: "Kids Room — lights out means lights out", rotate: -2, fastener: "tape" },
   { img: livingWideImg, alt: "Open living and dining area", caption: "Living Area — the whole gang fits", rotate: 1.4, fastener: "pin", pinColor: "navy" },
-  { img: twinsLawnImg, alt: "Two toddlers in sun hats sitting on the lawn in front of The Farmhouse", caption: "the littlest campers, reporting for duty", rotate: -2.2, fastener: "tape", portrait: true, width: 1280, height: 1707 },
-  { img: twirlImg, alt: "A girl twirling in a dress on the lakefront lawn at golden hour", caption: "golden hour twirls by the dock", rotate: 1.8, fastener: "pin", pinColor: "red", portrait: true, width: 1280, height: 1707 },
 ];
 
 const ExperienceSection = () => (
