@@ -102,7 +102,7 @@ const DetailsSection = () => (
           label="Campfire merit patch"
           felt="brick"
           rotate={-9}
-          className="absolute -bottom-7 -left-4 pointer-events-none"
+          className="absolute -bottom-7 -left-4 hidden sm:block pointer-events-none"
         />
         <p className="font-marker text-2xl sm:text-3xl text-[#b3402f] uppercase mb-1" aria-hidden="true">
           Camp Rules

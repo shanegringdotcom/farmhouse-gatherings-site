@@ -33,7 +33,7 @@ const LakeSection = () => (
           lines={["BEST", "BLUEGILL", "NE INDIANA"]}
           ink="navy"
           rotate={9}
-          className="absolute -bottom-10 -right-2 sm:-right-6 z-10"
+          className="absolute bottom-16 -right-2 sm:-bottom-10 sm:-right-6 z-10"
         />
       </div>
 
@@ -50,7 +50,7 @@ const LakeSection = () => (
           rotate={8}
           className="absolute -top-7 -right-4 pointer-events-none"
         />
-        <p className="font-typed text-xs uppercase tracking-[0.25em] text-[#2b2520]/50 mb-5">
+        <p className="font-typed text-xs uppercase tracking-[0.25em] text-[#2b2520]/50 mb-5 pr-16">
           Lake report — all summer
         </p>
         <div className="space-y-5 font-body text-[#2b2520]/70 text-base leading-relaxed">
