@@ -16,6 +16,11 @@ export default {
       fontFamily: {
         display: ["'Playfair Display'", "Georgia", "serif"],
         body: ["'Source Sans 3'", "system-ui", "sans-serif"],
+        // Bulletin-board voices: handwritten notes, marker stamps, typewriter
+        // cards. Hand/marker are Google Fonts; typed is system-only on purpose.
+        hand: ["'Caveat'", "'Bradley Hand'", "cursive"],
+        marker: ["'Permanent Marker'", "'Marker Felt'", "'Comic Sans MS'", "cursive"],
+        typed: ["'Courier New'", "Courier", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

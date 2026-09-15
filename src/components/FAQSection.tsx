@@ -1,5 +1,9 @@
 import { useState } from "react";
+import BoardPanel from "@/components/board/BoardPanel";
+import StampHeading from "@/components/board/StampHeading";
 
+// NOTE: these strings are duplicated character-for-character in index.html's
+// FAQPage JSON-LD block. Change one, change both.
 const faqs = [
   {
     q: "How do I book The Farmhouse at Big Long Lake?",
@@ -35,47 +39,67 @@ const faqs = [
   },
 ];
 
+// The questions clipboard, hung on the wall. Accordion mechanics unchanged —
+// only the chrome around the <dl> is new.
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 sm:py-32 px-6 border-t border-border/50 bg-surface-warm">
-      <div className="max-w-2xl mx-auto">
-        <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#2b2520] text-center mb-16">
+    <BoardPanel id="faq">
+      <div className="text-center mb-12">
+        <StampHeading ink="pine" rotate={-1} className="text-2xl sm:text-4xl">
           Common Questions
-        </h2>
-
-        <dl className="space-y-0 divide-y divide-[#2b2520]/10">
-          {faqs.map((faq, i) => (
-            <div key={i}>
-              <dt>
-                <button
-                  className="w-full flex items-center justify-between py-5 text-left gap-4"
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  aria-expanded={openIndex === i}
-                >
-                  <span className="font-display text-base sm:text-lg font-semibold text-[#2b2520]">
-                    {faq.q}
-                  </span>
-                  <span
-                    className="flex-shrink-0 font-body text-[#2b2520]/40 text-xl leading-none transition-transform duration-200"
-                    style={{ transform: openIndex === i ? "rotate(45deg)" : "none" }}
-                    aria-hidden="true"
-                  >
-                    +
-                  </span>
-                </button>
-              </dt>
-              {openIndex === i && (
-                <dd className="pb-5 font-body text-[#2b2520]/60 text-base leading-relaxed">
-                  {faq.a}
-                </dd>
-              )}
-            </div>
-          ))}
-        </dl>
+        </StampHeading>
       </div>
-    </section>
+
+      <div
+        className="relative max-w-2xl mx-auto bg-gradient-to-br from-[#8a5a33] to-[#6e4526] rounded-md p-3 sm:p-4 pt-8 sm:pt-9 shadow-lifted"
+        style={{ transform: "rotate(0.5deg)" }}
+      >
+        {/* Clipboard clip */}
+        <svg
+          viewBox="0 0 80 26"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 drop-shadow"
+          aria-hidden="true"
+        >
+          <rect x="4" y="8" width="72" height="14" rx="4" fill="#a8a8a8" />
+          <rect x="4" y="8" width="72" height="6" rx="3" fill="#c6c6c6" />
+          <path d="M32 8 V4 a8 8 0 0 1 16 0 v4" fill="none" stroke="#9a9a9a" strokeWidth="4" />
+        </svg>
+
+        <div className="bg-[#fdfcf7] bg-paper px-5 sm:px-8 py-4">
+          <dl className="space-y-0 divide-y divide-[#2b2520]/10">
+            {faqs.map((faq, i) => (
+              <div key={i}>
+                <dt>
+                  <button
+                    className="w-full flex items-center justify-between py-5 text-left gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
+                    onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                    aria-expanded={openIndex === i}
+                  >
+                    <span className="font-typed text-sm sm:text-base font-bold text-[#2b2520]">
+                      {faq.q}
+                    </span>
+                    <span
+                      className="flex-shrink-0 font-hand text-[#b3402f] text-2xl leading-none transition-transform duration-200"
+                      style={{ transform: openIndex === i ? "rotate(45deg)" : "none" }}
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </button>
+                </dt>
+                {openIndex === i && (
+                  <dd className="pb-5 font-body text-[#2b2520]/65 text-base leading-relaxed">
+                    {faq.a}
+                  </dd>
+                )}
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </BoardPanel>
   );
 };
 

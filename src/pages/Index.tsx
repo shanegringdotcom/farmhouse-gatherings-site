@@ -6,23 +6,31 @@ import LakeSection from "@/components/LakeSection";
 import AreaSection from "@/components/AreaSection";
 import DetailsSection from "@/components/DetailsSection";
 import FAQSection from "@/components/FAQSection";
+import GuestNotesSection from "@/components/GuestNotesSection";
 import InquirySection from "@/components/InquirySection";
+import MotionProvider from "@/components/board/MotionProvider";
+import PatchStrip from "@/components/board/PatchStrip";
 import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
     <>
       <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ExperienceSection />
-        <LakeSection />
-        <AreaSection />
-        <DetailsSection />
-        <FAQSection />
-        <InquirySection />
-      </main>
+      <MotionProvider>
+        {/* The whole page is one continuous corkboard. */}
+        <main className="bg-corkboard">
+          <HeroSection />
+          <AboutSection />
+          <ExperienceSection />
+          <PatchStrip />
+          <LakeSection />
+          <AreaSection />
+          <DetailsSection />
+          <FAQSection />
+          <GuestNotesSection />
+          <InquirySection />
+        </main>
+      </MotionProvider>
       <Footer />
     </>
   );
