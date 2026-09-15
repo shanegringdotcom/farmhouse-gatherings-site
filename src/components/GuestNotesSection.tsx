@@ -22,12 +22,17 @@ const notes: {
     pin: "red",
     variant: "cream",
   },
+  {
+    quote: "Thank you so much for the stay! It was perfect for my sister, her daughters, and her grandkids.",
+    name: "Lindsay",
+    date: "July 2026",
+    rotate: 1.2,
+    pin: "navy",
+    variant: "white",
+  },
 ];
 
-const openSpots = [
-  { rotate: 1.4, label: "this spot's saved for your crew" },
-  { rotate: -1, label: "and one for the next family after that" },
-];
+const openSpots = [{ rotate: -1, label: "this spot's saved for your crew" }];
 
 const GuestNotesSection = () => (
   <BoardPanel id="guest-notes">
