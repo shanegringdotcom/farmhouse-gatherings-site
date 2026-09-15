@@ -51,7 +51,18 @@ const PinDot = ({ color }: { color: string }) => (
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [guidesOpen, setGuidesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const guidesRef = useRef<HTMLDivElement>(null);
+
+  // The bar itself is transparent; once the page scrolls, a slight backdrop
+  // blur separates the floating tabs from whatever passes underneath.
+  // Effect-only, so the prerender stays untouched.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // The #section targets all live on the homepage. On /about and
   // /big-long-lake they don't exist, so a bare "#inquire" href pointed at
@@ -93,12 +104,16 @@ const Navbar = () => {
   }, [guidesOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b-2 border-[#7a5a38]/60">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "backdrop-blur-[5px] bg-[#f2e8d5]/15" : ""
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 gap-4">
         <a
           href="/"
           onClick={(e) => handleClick(e, "#hero")}
-          className="font-hand text-2xl sm:text-[1.7rem] font-bold text-foreground whitespace-nowrap shrink-0 -rotate-2 hover:rotate-0 transition-transform"
+          className="font-hand text-2xl sm:text-[1.7rem] font-bold text-[#2b2520] whitespace-nowrap shrink-0 -rotate-2 hover:rotate-0 transition-transform [text-shadow:0_1px_0_rgba(255,255,255,0.25)]"
         >
           The Farmhouse
         </a>
@@ -186,7 +201,7 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-foreground shrink-0"
+          className="md:hidden p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-[#2b2520] shrink-0"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
           aria-expanded={open}
