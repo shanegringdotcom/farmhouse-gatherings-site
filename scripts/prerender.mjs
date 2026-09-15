@@ -350,6 +350,18 @@ const routes = [
       "A guide to ice cream in northern Indiana — 24 shops across LaGrange, Steuben, Noble and Kosciusko counties, including the eight stops on the Steuben County Ice Cream Trail, sorted by distance from the lakes.",
     jsonLd: iceCreamGuideJsonLd,
   },
+  {
+    // Served by the Worker's `not_found_handling: "404-page"` for any unknown
+    // path — a real HTTP 404 whose body is the NotFound page (the router's "*"
+    // route matches "/404" too). notFound strips the canonical/og:url and sets
+    // noindex: the old Netlify soft-404 problem was unknown paths carrying the
+    // homepage canonical.
+    path: "/404",
+    out: "404.html",
+    title: "Page Not Found | The Farmhouse at Big Long Lake",
+    description: "That page doesn't exist. Head back to the farmhouse.",
+    notFound: true,
+  },
 ];
 
 const esc = (s) =>
@@ -389,6 +401,14 @@ const applyHead = (html, route) => {
     // Homepage-specific schema shouldn't appear on sub-pages.
     html = stripBlock(html, "VacationRental");
     html = stripBlock(html, "FAQPage");
+  }
+
+  if (route.notFound) {
+    // A 404 must not claim to be a canonical page or invite indexing.
+    html = html
+      .replace(/\s*<link rel="canonical"[^>]*\/?>/, "")
+      .replace(/\s*<meta property="og:url"[^>]*\/?>/, "")
+      .replace(/(<meta name="robots" content=")[\s\S]*?(")/, "$1noindex$2");
   }
 
   if (route.jsonLd && route.jsonLd.length) {

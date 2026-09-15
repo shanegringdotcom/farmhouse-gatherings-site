@@ -1,0 +1,52 @@
+// Cloudflare Worker serving the prerendered site + the inquiry form backend.
+// Replaces Netlify hosting + Netlify Forms. See netlify.toml (until deleted)
+// for the behaviors each assets/worker setting reproduces.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "biglongfarmhouse",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // /about serves about.html with a 200 (no redirect) — the sitemap and
+    // canonicals are all slash-less, same reason the prerender emits flat files.
+    "html_handling": "auto-trailing-slash",
+    // Unknown paths get dist/404.html with a real HTTP 404 (prerendered
+    // NotFound page, noindex, no canonical) — no more soft-404 SPA fallback.
+    "not_found_handling": "404-page",
+    // Only these paths hit the worker script; everything else is served
+    // directly from assets at the edge.
+    "run_worker_first": ["/welcome", "/__forms.html", "/api/*"]
+  },
+
+  // No *.workers.dev host and no preview URLs in production — the Netlify-era
+  // duplicate-host problem (biglongfarmhouse.netlify.app) solved by absence.
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "biglongfarmhouse.com", "custom_domain": true },
+    { "pattern": "www.biglongfarmhouse.com", "custom_domain": true }
+  ],
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "farmhouse-inquiries",
+      "database_id": "191a820f-fccf-4762-b304-d3a85b6d4386",
+      "migrations_dir": "./migrations"
+    }
+  ],
+
+  // Email Service binding — no API keys; biglongfarmhouse.com is onboarded to
+  // Email Sending (wrangler email sending enable biglongfarmhouse.com).
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_sender_addresses": ["noreply@biglongfarmhouse.com"]
+    }
+  ],
+
+  "observability": { "enabled": true }
+}
