@@ -15,7 +15,7 @@ declare global {
 // the /welcome rewrite, the inquiry form POST — plus host canonicalization.
 
 const CANONICAL_HOST = "biglongfarmhouse.com";
-const NOTIFY_TO = "hello@biglongfarmhouse.com";
+const NOTIFY_TO = "shane@shanegring.com";
 const FROM = { email: "noreply@biglongfarmhouse.com", name: "Farmhouse Inquiries" };
 
 // Mirrors the zod schema in src/components/InquirySection.tsx — keep in sync.
