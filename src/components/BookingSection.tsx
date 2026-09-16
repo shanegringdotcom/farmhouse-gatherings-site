@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import PushPin from "@/components/board/PushPin";
+import BookingCalendar from "@/components/BookingCalendar";
 import { pushEvent, CONTACT_EMAIL, trackContactClick } from "@/lib/analytics";
 import {
   BookingError,
@@ -22,6 +23,11 @@ const WINDOW_DAYS = 365;
 
 const MAX_ADULTS = 12; // the house sleeps 12; OwnerRez still has final say
 const QUOTE_DEBOUNCE_MS = 400;
+
+const fmtDate = (isoDate: string) =>
+  new Date(isoDate + "T00:00:00Z").toLocaleDateString("en-US", {
+    weekday: "short", month: "short", day: "numeric", timeZone: "UTC",
+  });
 
 const today = () => new Date().toISOString().slice(0, 10);
 const addDays = (iso: string, n: number) =>
@@ -118,18 +124,6 @@ const BookingSection = () => {
     };
   }, [stay, arrival, departure, localCheck]);
 
-  // Keep departure after arrival whenever arrival moves.
-  const onArrivalChange = useCallback(
-    (value: string) => {
-      markStart();
-      setArrival(value);
-      if (value && departure && Date.parse(departure) <= Date.parse(value)) {
-        setDeparture(addDays(value, 2)); // 2-night minimum is the common rule here
-      }
-    },
-    [departure]
-  );
-
   // ---- checkout -----------------------------------------------------------
   const priced = quote?.bookable === true ? quote : null;
   const canSubmit =
@@ -196,32 +190,24 @@ const BookingSection = () => {
           </p>
 
           <form onSubmit={handleSubmit} onFocus={markStart} className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="arrival" className={labelClass}>Check in</Label>
-                <Input
-                  id="arrival"
-                  type="date"
-                  value={arrival}
-                  min={bookingWindow.min}
-                  max={bookingWindow.max}
-                  onChange={(e) => onArrivalChange(e.target.value)}
-                  className={fieldClass}
-                />
-              </div>
-              <div>
-                <Label htmlFor="departure" className={labelClass}>Check out</Label>
-                <Input
-                  id="departure"
-                  type="date"
-                  value={departure}
-                  min={arrival ? addDays(arrival, 1) : bookingWindow.min}
-                  max={bookingWindow.max}
-                  onChange={(e) => { markStart(); setDeparture(e.target.value); }}
-                  className={fieldClass}
-                />
-              </div>
-            </div>
+            <BookingCalendar
+              nights={nights}
+              arrival={arrival}
+              departure={departure}
+              onChange={(a, d) => {
+                markStart();
+                setArrival(a);
+                setDeparture(d);
+              }}
+            />
+
+            {/* The chosen range in words. The grid shows which cells are lit,
+                but a guest committing to a price needs the dates spelled out. */}
+            {arrival && departure && (
+              <p className="font-hand text-2xl text-[#2b2520]/75 text-center">
+                {fmtDate(arrival)} &rarr; {fmtDate(departure)}
+              </p>
+            )}
 
             <div className="grid grid-cols-3 gap-4">
               <div>
