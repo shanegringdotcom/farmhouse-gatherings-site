@@ -8,6 +8,7 @@ import BigLongLake from "./pages/BigLongLake";
 import NorthernIndianaLakes from "./pages/NorthernIndianaLakes";
 import NorthernIndianaIceCream from "./pages/NorthernIndianaIceCream";
 import Welcome from "./pages/Welcome";
+import BookingConfirmed from "./pages/BookingConfirmed";
 import NotFound from "./pages/NotFound";
 
 // Router-agnostic app tree. The router itself is supplied by the caller:
@@ -28,6 +29,7 @@ const AppRoutes = () => {
         <Route path="/northern-indiana-lakes" element={<NorthernIndianaLakes />} />
         <Route path="/northern-indiana-ice-cream" element={<NorthernIndianaIceCream />} />
         <Route path="/welcome" element={<Welcome />} />
+        <Route path="/booking-confirmed" element={<BookingConfirmed />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </TooltipProvider>

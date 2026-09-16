@@ -7,6 +7,15 @@
   "main": "worker/index.ts",
   "compatibility_date": "2026-09-01",
 
+  // OwnerRez direct booking. The property is pinned here so a client can never
+  // choose it; the credentials that go with it are secrets, never vars —
+  // OWNERREZ_USERNAME + OWNERREZ_PAT via `wrangler secret put` for production,
+  // .dev.vars (gitignored) for local. Setting this also disables the
+  // /api/ownerrez/properties discovery route, which is setup-only.
+  "vars": {
+    "OWNERREZ_PROPERTY_ID": "496646"
+  },
+
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

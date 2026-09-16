@@ -351,6 +351,16 @@ const routes = [
     jsonLd: iceCreamGuideJsonLd,
   },
   {
+    // Where OwnerRez returns the guest after payment + e-signature. Flat file
+    // for the same reason as /about, and noindex because it is a transactional
+    // dead end — deliberately NOT added to sitemap.xml.
+    path: "/booking-confirmed",
+    out: "booking-confirmed.html",
+    title: "Booking Confirmed | The Farmhouse at Big Long Lake",
+    description: "Your stay at The Farmhouse at Big Long Lake is confirmed.",
+    noindex: true,
+  },
+  {
     // Served by the Worker's `not_found_handling: "404-page"` for any unknown
     // path — a real HTTP 404 whose body is the NotFound page (the router's "*"
     // route matches "/404" too). notFound strips the canonical/og:url and sets
@@ -401,6 +411,12 @@ const applyHead = (html, route) => {
     // Homepage-specific schema shouldn't appear on sub-pages.
     html = stripBlock(html, "VacationRental");
     html = stripBlock(html, "FAQPage");
+  }
+
+  if (route.noindex) {
+    // Indexable pages only. A post-payment landing page has nothing to offer a
+    // searcher and would compete with the homepage for the brand query.
+    html = html.replace(/(<meta name="robots" content=")[\s\S]*?(")/, "$1noindex$2");
   }
 
   if (route.notFound) {

@@ -7,6 +7,7 @@ import AreaSection from "@/components/AreaSection";
 import DetailsSection from "@/components/DetailsSection";
 import FAQSection from "@/components/FAQSection";
 import GuestNotesSection from "@/components/GuestNotesSection";
+import BookingSection from "@/components/BookingSection";
 import InquirySection from "@/components/InquirySection";
 import MotionProvider from "@/components/board/MotionProvider";
 import PatchStrip from "@/components/board/PatchStrip";
@@ -28,6 +29,7 @@ const Index = () => {
           <DetailsSection />
           <FAQSection />
           <GuestNotesSection />
+          <BookingSection />
           <InquirySection />
         </main>
       </MotionProvider>
