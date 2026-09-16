@@ -18,7 +18,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 // links resolve to /#section off the homepage; see hrefFor below.
 //
 // Styling: bulletin-board whimsy — links are little paper tabs pinned to the
-// bar, the brand is handwritten, Inquire is a rubber stamp. All logic
+// bar, the brand is handwritten, Book is a rubber stamp. All logic
 // (hrefFor, smooth scroll, dropdown open/close, prerendered panel) unchanged.
 const GUIDES = [
   { label: "Big Long Lake", href: "/big-long-lake" },
@@ -65,9 +65,9 @@ const Navbar = () => {
   }, []);
 
   // The #section targets all live on the homepage. On /about and
-  // /big-long-lake they don't exist, so a bare "#inquire" href pointed at
+  // /big-long-lake they don't exist, so a bare "#book" href pointed at
   // nothing and the click handler swallowed the event — the link was simply
-  // dead. Off the homepage we emit "/#inquire" instead and let the browser
+  // dead. Off the homepage we emit "/#book" instead and let the browser
   // navigate. useLocation (not window) so this is correct during prerender too.
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -187,15 +187,15 @@ const Navbar = () => {
           </div>
 
           <a
-            href={hrefFor("#inquire")}
-            onClick={(e) => handleClick(e, "#inquire")}
+            href={hrefFor("#book")}
+            onClick={(e) => handleClick(e, "#book")}
             className="relative font-marker uppercase tracking-wider text-xs bg-[#b3402f] text-[#fdf6e8] px-4 py-2 border-2 border-[#7a2418] shadow-pinned -rotate-1 hover:rotate-0 transition-transform whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
           >
             <span
               aria-hidden="true"
               className="absolute inset-0.5 border border-dashed border-[#fdf6e8]/45 pointer-events-none"
             />
-            Inquire
+            Book
           </a>
         </div>
 
@@ -246,15 +246,15 @@ const Navbar = () => {
           ))}
 
           <a
-            href={hrefFor("#inquire")}
-            onClick={(e) => handleClick(e, "#inquire")}
+            href={hrefFor("#book")}
+            onClick={(e) => handleClick(e, "#book")}
             className="relative block w-full text-center mt-5 py-3 font-marker uppercase tracking-wider text-sm bg-[#b3402f] text-[#fdf6e8] border-2 border-[#7a2418] shadow-pinned"
           >
             <span
               aria-hidden="true"
               className="absolute inset-1 border border-dashed border-[#fdf6e8]/45 pointer-events-none"
             />
-            Inquire
+            Book
           </a>
         </div>
       )}

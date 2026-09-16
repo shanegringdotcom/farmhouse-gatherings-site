@@ -80,7 +80,7 @@ const HeroSection = () => (
         come to the lake!
       </p>
       <a
-        href="#inquire"
+        href="#book"
         className="relative inline-block font-marker uppercase tracking-wider text-base sm:text-lg bg-[#b3402f] text-[#fdf6e8] px-8 py-3 border-2 border-[#7a2418] shadow-pinned -rotate-1 hover:rotate-0 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
       >
         <span
