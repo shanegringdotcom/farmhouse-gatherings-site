@@ -1,6 +1,7 @@
 import heroImg from "@/assets/deck-view.webp";
 import Tape from "@/components/board/Tape";
 import StickerBadge from "@/components/board/StickerBadge";
+import BookingSection from "@/components/BookingSection";
 
 // Corner staple for the hero poster.
 const Staple = ({ className = "" }: { className?: string }) => (
@@ -14,12 +15,18 @@ const Staple = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
-// The hero is a big cream poster stapled to the dark lodge wall. The photo
-// stays a plain eager <img> — it is the LCP element, so no masks or filters.
+// The hero is a big cream poster stapled to the dark lodge wall, with the
+// booking panel pinned up next to it. The photo stays a plain eager <img> — it
+// is the LCP element, so no masks or filters.
+//
+// Side by side only from xl: the poster needs its full 48rem for the headline,
+// and the panel needs ~26rem for a seven-column calendar. Any narrower and the
+// panel drops directly under the poster, which is where "Book Your Week ↓"
+// points; at xl that button is hidden because the calendar is already in view.
 const HeroSection = () => (
   <section
     id="hero"
-    className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-16 sm:pt-28"
+    className="relative min-h-screen flex flex-col xl:flex-row items-center justify-center gap-14 xl:gap-12 px-4 sm:px-6 pt-24 pb-16 sm:pt-28"
   >
     <div
       className="relative w-full max-w-3xl bg-paper shadow-lifted px-5 pt-8 pb-7 sm:px-10 sm:pt-12 sm:pb-10 text-center"
@@ -81,7 +88,7 @@ const HeroSection = () => (
       </p>
       <a
         href="#book"
-        className="relative inline-block font-marker uppercase tracking-wider text-base sm:text-lg bg-[#b3402f] text-[#fdf6e8] px-8 py-3 border-2 border-[#7a2418] shadow-pinned -rotate-1 hover:rotate-0 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
+        className="xl:hidden relative inline-block font-marker uppercase tracking-wider text-base sm:text-lg bg-[#b3402f] text-[#fdf6e8] px-8 py-3 border-2 border-[#7a2418] shadow-pinned -rotate-1 hover:rotate-0 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
       >
         <span
           aria-hidden="true"
@@ -89,6 +96,10 @@ const HeroSection = () => (
         />
         Book Your Week ↓
       </a>
+    </div>
+
+    <div className="w-full xl:w-[26rem] xl:shrink-0">
+      <BookingSection embedded />
     </div>
   </section>
 );

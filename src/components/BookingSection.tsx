@@ -39,7 +39,12 @@ const labelClass = "font-hand text-xl text-[#2b2520]/75";
 
 const ANALYTICS = { form_id: "booking", form_name: "Direct Booking" } as const;
 
-const BookingSection = () => {
+// `embedded` drops the section's own band of vertical padding so the panel can
+// sit inside another section — the hero pins it beside the poster. Either way
+// the panel owns id="book", so every "#book" link on the site still lands here.
+// Render it once per page: the field ids and the availability fetch are not
+// built to be duplicated.
+const BookingSection = ({ embedded = false }: { embedded?: boolean }) => {
   const [nights, setNights] = useState<Night[]>([]);
   const [calendarError, setCalendarError] = useState(false);
 
@@ -168,7 +173,11 @@ const BookingSection = () => {
     arrival && departure ? Math.round((Date.parse(departure) - Date.parse(arrival)) / 86_400_000) : 0;
 
   return (
-    <section id="book" className="py-16 sm:py-24 px-4 sm:px-6">
+    <section
+      id="book"
+      aria-label="Book direct"
+      className={embedded ? "w-full scroll-mt-24" : "py-16 sm:py-24 px-4 sm:px-6"}
+    >
       <div className="max-w-lg mx-auto relative">
         <div
           className="bg-paper shadow-lifted px-6 sm:px-10 pt-10 pb-9 relative"
