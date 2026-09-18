@@ -326,9 +326,9 @@ const LakeHistory = () => {
                   <p>
                     The lake's story is still being written by the families
                     who call it home. When one family purchased three lots in
-                    the Indianola section in <strong>1955</strong>, an old
-                    Indian teepee stood on the prime parcel — and the
-                    purchase papers were signed inside it. Other cottages
+                    the Indianola section in <strong>1955</strong>, old
+                    Native American housing stood on the prime parcel — and
+                    the purchase papers were signed inside it. Other cottages
                     have stayed in the same families since the 1940s, passed
                     from one generation to the next along with the memories
                     that come with them.
