@@ -72,6 +72,33 @@ const guideJsonLd = [
   },
 ];
 
+// The lake's history page, nested under the Big Long Lake guide in the
+// breadcrumb. `about` points at the LakeBodyOfWater entity defined on
+// /big-long-lake rather than redefining it here.
+const historyJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Big Long Lake Guide", item: `${SITE}/big-long-lake` },
+      { "@type": "ListItem", position: 3, name: "History", item: `${SITE}/history-of-big-long-lake` },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE}/history-of-big-long-lake#webpage`,
+    url: `${SITE}/history-of-big-long-lake`,
+    name: "The History of Big Long Lake",
+    description:
+      "The story of Big Long Lake in LaGrange County, Indiana — from the Cochran family's 1800s settlement and Cochran's Tavern to Lee Hartzell's cottage era, the 1926 amusement company, and the Shady Nook Resort.",
+    isPartOf: { "@id": `${SITE}/#website` },
+    about: { "@id": `${SITE}/big-long-lake#lake` },
+    image: `${SITE}/images/history/1925-big-long-lake-survey-map.jpg`,
+  },
+];
+
 // The regional lakes guide. FAQPage mirrors the questions rendered on the page —
 // keep the two in sync, or the markup misrepresents the content.
 const lakesGuideFaqs = [
@@ -335,6 +362,19 @@ const routes = [
     jsonLd: guideJsonLd,
   },
   {
+    path: "/history-of-big-long-lake",
+    out: "history-of-big-long-lake.html",
+    title: "The History of Big Long Lake | LaGrange County, Indiana",
+    description:
+      "The story of Big Long Lake in LaGrange County, Indiana — from the Cochran family's 1800s settlement and Cochran's Tavern to Lee Hartzell's cottage era, the 1926 amusement company, and the Shady Nook Resort.",
+    jsonLd: historyJsonLd,
+    // Own OG/Twitter image — the 1925 survey map, not the default deck photo.
+    image: {
+      url: `${SITE}/images/history/1925-big-long-lake-survey-map.jpg`,
+      alt: "1925 State of Indiana Department of Conservation blueprint survey map of Big Long Lake, LaGrange County, showing depth contours, shoreline, and topography.",
+    },
+  },
+  {
     path: "/northern-indiana-lakes",
     out: "northern-indiana-lakes.html",
     title: "Northern Indiana Lakes: Complete Guide to Indiana's Lake Country",
@@ -425,6 +465,19 @@ const applyHead = (html, route) => {
       .replace(/\s*<link rel="canonical"[^>]*\/?>/, "")
       .replace(/\s*<meta property="og:url"[^>]*\/?>/, "")
       .replace(/(<meta name="robots" content=")[\s\S]*?(")/, "$1noindex$2");
+  }
+
+  if (route.image) {
+    // Per-route social image override. Only og:image, og:image:alt and
+    // twitter:image exist as tags in index.html — no og:image:width/height
+    // to touch. Routes without `image` fall through untouched, so their
+    // output stays byte-identical.
+    const imageUrl = esc(route.image.url);
+    const imageAlt = esc(route.image.alt);
+    html = html
+      .replace(/(<meta property="og:image" content=")[\s\S]*?(")/, `$1${imageUrl}$2`)
+      .replace(/(<meta property="og:image:alt" content=")[\s\S]*?(")/, `$1${imageAlt}$2`)
+      .replace(/(<meta name="twitter:image" content=")[\s\S]*?(")/, `$1${imageUrl}$2`);
   }
 
   if (route.jsonLd && route.jsonLd.length) {

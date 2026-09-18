@@ -21,6 +21,7 @@ const groups = [
     title: "Guides",
     links: [
       { label: "Big Long Lake Guide", href: "/big-long-lake" },
+      { label: "Lake History", href: "/history-of-big-long-lake" },
       { label: "Northern Indiana Lakes", href: "/northern-indiana-lakes" },
       { label: "Ice Cream Guide", href: "/northern-indiana-ice-cream" },
     ],

@@ -5,6 +5,7 @@ import { useHashScroll } from "@/hooks/use-hash-scroll";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import BigLongLake from "./pages/BigLongLake";
+import LakeHistory from "./pages/LakeHistory";
 import NorthernIndianaLakes from "./pages/NorthernIndianaLakes";
 import NorthernIndianaIceCream from "./pages/NorthernIndianaIceCream";
 import Welcome from "./pages/Welcome";
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
         <Route path="/big-long-lake" element={<BigLongLake />} />
+        <Route path="/history-of-big-long-lake" element={<LakeHistory />} />
         <Route path="/northern-indiana-lakes" element={<NorthernIndianaLakes />} />
         <Route path="/northern-indiana-ice-cream" element={<NorthernIndianaIceCream />} />
         <Route path="/welcome" element={<Welcome />} />

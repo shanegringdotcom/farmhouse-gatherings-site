@@ -10,9 +10,10 @@ import { Menu, X, ChevronDown } from "lucide-react";
 // book". Our Family and the contact address still live only in the footer.
 //
 // "Guides" is the one exception to the flat list. It was a bare link to
-// /big-long-lake, which quietly hid the other two guides from anyone not
-// scrolling to the footer — so it is now a dropdown over all three. That keeps
-// the bar at three items while making the whole set reachable in one hover.
+// /big-long-lake, which quietly hid the other guides from anyone not
+// scrolling to the footer — so it is now a dropdown over all of them. That
+// keeps the bar at three items while making the whole set reachable in one
+// hover.
 //
 // The same set renders on every page, so there is no context switching. Hash
 // links resolve to /#section off the homepage; see hrefFor below.
@@ -22,6 +23,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 // (hrefFor, smooth scroll, dropdown open/close, prerendered panel) unchanged.
 const GUIDES = [
   { label: "Big Long Lake", href: "/big-long-lake" },
+  { label: "Lake History", href: "/history-of-big-long-lake" },
   { label: "Northern Indiana Lakes", href: "/northern-indiana-lakes" },
   { label: "Ice Cream", href: "/northern-indiana-ice-cream" },
 ];
