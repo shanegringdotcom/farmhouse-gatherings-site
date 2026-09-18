@@ -4,6 +4,8 @@ import TornSheet from "@/components/board/TornSheet";
 import IndexCard from "@/components/board/IndexCard";
 import PushPin from "@/components/board/PushPin";
 import MeritPatch from "@/components/board/MeritPatch";
+import Tape from "@/components/board/Tape";
+import surveyMap from "@/assets/history/1925-big-long-lake-survey-map-1200w.webp";
 
 const highlights = [
   {
@@ -33,7 +35,8 @@ const highlights = [
 ];
 
 // The area board: intro sheet (with the SEO-load-bearing guide links kept in
-// prose), three pinned guide index cards, and four flyers.
+// prose), three pinned guide index cards, the 1925 survey map taped up as the
+// way into the lake history page, and four flyers.
 const AreaSection = () => (
   <BoardPanel id="area">
     <div className="text-center mb-10">
@@ -115,6 +118,48 @@ const AreaSection = () => (
           className="absolute -bottom-6 -right-3 pointer-events-none"
         />
       </div>
+    </div>
+
+    {/* The 1925 survey map. The image and the prose link both go to the history
+        page; the prose link carries the anchor text, same as the guide links above. */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12 items-center max-w-4xl mx-auto mb-16">
+      <figure className="relative w-full max-w-[19rem] sm:max-w-sm mx-auto" style={{ transform: "rotate(-1.4deg)" }}>
+        <Tape className="-top-3 -left-2 sm:-left-4" rotate={-38} />
+        <Tape className="-top-3 -right-2 sm:-right-4" rotate={38} />
+        <a href="/history-of-big-long-lake" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
+          <img
+            src={surveyMap}
+            alt="1925 State of Indiana Department of Conservation blueprint survey map of Big Long Lake, LaGrange County, showing depth contours, shoreline, and topography."
+            className="w-full h-auto border-[6px] border-white shadow-pinned"
+            loading="lazy"
+            decoding="async"
+            width={1189}
+            height={1200}
+          />
+        </a>
+        <figcaption className="font-hand text-xl text-[#2b2520]/70 text-center pt-3">
+          Big Long Lake, surveyed in 1925
+        </figcaption>
+      </figure>
+
+      <TornSheet variant="kraft" rotate={0.8} className="px-6 py-8 sm:px-8">
+        <PushPin color="navy" className="absolute -top-3.5 left-1/2 -translate-x-1/2" />
+        <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#2b2520] mb-3 text-center">
+          A Lake With a Long Story
+        </h3>
+        <p className="font-body text-[#2b2520]/70 text-base leading-relaxed text-center">
+          In 1925 an Indiana University geology professor charted the lake's depths — and marked the cottages
+          standing on the water at the time. The story goes back further still: the earliest maps just call it
+          "Long Lake." Read the{" "}
+          <a
+            href="/history-of-big-long-lake"
+            className="text-secondary underline underline-offset-4 hover:text-secondary/80 transition-colors"
+          >
+            history of Big Long Lake
+          </a>
+          , from the first farm families to the resort years.
+        </p>
+      </TornSheet>
     </div>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 max-w-4xl mx-auto">
