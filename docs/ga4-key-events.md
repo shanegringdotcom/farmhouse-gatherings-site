@@ -7,7 +7,7 @@ turns them into tracked conversions in GA4. You only need to do this once.
 **Events the site now sends:** `form_start`, `form_submit`, `generate_lead`, `form_error`
 
 Each event also carries these parameters: `form_id` (`inquiry`), `form_name`
-(`Booking Inquiry`), `form_destination` (`netlify-forms`), and — on
+(`Booking Inquiry`), `form_destination` (`worker`), and — on
 `generate_lead` — `currency` (`USD`) and `value` (`0`).
 
 ---

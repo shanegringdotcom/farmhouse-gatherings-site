@@ -372,10 +372,10 @@ const routes = [
     home: true,
   },
   {
-    // Flat `about.html`, not `about/index.html`. With Netlify's pretty_urls a
-    // directory index makes /about 301 to /about/, so every internal link, the
-    // sitemap entry and the canonical (all slash-less) cost a redirect hop.
-    // A flat file is served at /about directly, 200.
+    // Flat `about.html`, not `about/index.html`. A directory index would make
+    // /about 301 to /about/, so every internal link, the sitemap entry and the
+    // canonical (all slash-less) cost a redirect hop. A flat file is served at
+    // /about directly, 200 — see wrangler.jsonc's html_handling.
     path: "/about",
     out: "about.html",
     title: "Our Family | The Farmhouse at Big Long Lake",

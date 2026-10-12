@@ -1,6 +1,6 @@
 // Cloudflare Worker serving the prerendered site + the inquiry form backend.
-// Replaces Netlify hosting + Netlify Forms. See netlify.toml (until deleted)
-// for the behaviors each assets/worker setting reproduces.
+// Replaces Netlify hosting + Netlify Forms (retired) — the settings below
+// reproduce the behaviors netlify.toml used to handle.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "biglongfarmhouse",
