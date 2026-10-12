@@ -2,6 +2,8 @@ import heroImg from "@/assets/deck-view.webp";
 import Tape from "@/components/board/Tape";
 import StickerBadge from "@/components/board/StickerBadge";
 import BookingSection from "@/components/BookingSection";
+import InquirySection from "@/components/InquirySection";
+import { DIRECT_BOOKING_ENABLED, BOOK_ANCHOR } from "@/lib/features";
 
 // Corner staple for the hero poster.
 const Staple = ({ className = "" }: { className?: string }) => (
@@ -87,19 +89,22 @@ const HeroSection = () => (
         come to the lake!
       </p>
       <a
-        href="#book"
+        href={BOOK_ANCHOR}
         className="xl:hidden relative inline-block font-marker uppercase tracking-wider text-base sm:text-lg bg-[#b3402f] text-[#fdf6e8] px-8 py-3 border-2 border-[#7a2418] shadow-pinned -rotate-1 hover:rotate-0 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2"
       >
         <span
           aria-hidden="true"
           className="absolute inset-1 border-2 border-dashed border-[#fdf6e8]/45 pointer-events-none"
         />
-        Book Your Week ↓
+        {DIRECT_BOOKING_ENABLED ? "Book Your Week ↓" : "Check Dates ↓"}
       </a>
     </div>
 
+    {/* The booking panel is off while DIRECT_BOOKING_ENABLED is false (see
+        @/lib/features) — the enquiry form takes its place here instead, so
+        there is still exactly one form on the page. */}
     <div className="w-full xl:w-[26rem] xl:shrink-0">
-      <BookingSection embedded />
+      {DIRECT_BOOKING_ENABLED ? <BookingSection embedded /> : <InquirySection embedded />}
     </div>
   </section>
 );

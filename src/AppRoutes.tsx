@@ -8,6 +8,7 @@ import BigLongLake from "./pages/BigLongLake";
 import LakeHistory from "./pages/LakeHistory";
 import NorthernIndianaLakes from "./pages/NorthernIndianaLakes";
 import NorthernIndianaIceCream from "./pages/NorthernIndianaIceCream";
+import IndianaLakeHouseRental from "./pages/IndianaLakeHouseRental";
 import Welcome from "./pages/Welcome";
 import BookingConfirmed from "./pages/BookingConfirmed";
 import NotFound from "./pages/NotFound";
@@ -30,6 +31,7 @@ const AppRoutes = () => {
         <Route path="/history-of-big-long-lake" element={<LakeHistory />} />
         <Route path="/northern-indiana-lakes" element={<NorthernIndianaLakes />} />
         <Route path="/northern-indiana-ice-cream" element={<NorthernIndianaIceCream />} />
+        <Route path="/indiana-lake-house-rental" element={<IndianaLakeHouseRental />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/booking-confirmed" element={<BookingConfirmed />} />
         <Route path="*" element={<NotFound />} />

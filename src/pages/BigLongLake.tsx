@@ -128,7 +128,14 @@ const BigLongLake = () => {
                     </a>{" "}
                     for a family reunion, a summer week,
                     or a long weekend, this guide covers what there is to do on the water
-                    and around town.
+                    and around town &mdash; and our page on the{" "}
+                    <a
+                      href="/indiana-lake-house-rental"
+                      className="underline decoration-secondary/40 underline-offset-4 hover:decoration-secondary transition-colors"
+                    >
+                      lake house rental in Indiana
+                    </a>{" "}
+                    covers the dock, the bedrooms and booking direct.
                   </p>
                   <p>
                     Looking further afield? Big Long is one of 239 public lakes across

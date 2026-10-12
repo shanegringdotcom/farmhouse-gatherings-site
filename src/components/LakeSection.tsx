@@ -87,7 +87,14 @@ const LakeSection = () => (
               Big Long Lake
             </a>{" "}
             covers the depth, the fishing, the public boat launch, and what the
-            shoreline is actually like.
+            shoreline is actually like. Comparing places? Here's what a{" "}
+            <a
+              href="/indiana-lake-house-rental"
+              className="text-secondary underline underline-offset-4 hover:text-secondary/80 transition-colors"
+            >
+              lake house rental in Indiana
+            </a>{" "}
+            looks like when you stay here.
           </p>
         </div>
       </TornSheet>

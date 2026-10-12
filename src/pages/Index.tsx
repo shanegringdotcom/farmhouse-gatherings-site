@@ -11,6 +11,7 @@ import InquirySection from "@/components/InquirySection";
 import MotionProvider from "@/components/board/MotionProvider";
 import PatchStrip from "@/components/board/PatchStrip";
 import Footer from "@/components/Footer";
+import { DIRECT_BOOKING_ENABLED } from "@/lib/features";
 
 const Index = () => {
   return (
@@ -28,7 +29,10 @@ const Index = () => {
           <DetailsSection />
           <FAQSection />
           <GuestNotesSection />
-          <InquirySection />
+          {/* While direct booking is off, the enquiry form already lives in
+              the hero (see HeroSection) — rendering it again here would be a
+              second id="inquire" on the page. */}
+          {DIRECT_BOOKING_ENABLED && <InquirySection />}
         </main>
       </MotionProvider>
       <Footer />

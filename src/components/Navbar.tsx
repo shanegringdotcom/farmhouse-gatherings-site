@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { BOOK_ANCHOR } from "@/lib/features";
 
 // Deliberately three items and one button — the nav had grown to ten flat items
 // and was wrapping onto two lines by 820px.
@@ -189,8 +190,8 @@ const Navbar = () => {
           </div>
 
           <a
-            href={hrefFor("#book")}
-            onClick={(e) => handleClick(e, "#book")}
+            href={hrefFor(BOOK_ANCHOR)}
+            onClick={(e) => handleClick(e, BOOK_ANCHOR)}
             className="relative font-marker uppercase tracking-wider text-xs bg-[#b3402f] text-[#fdf6e8] px-4 py-2 border-2 border-[#7a2418] shadow-pinned -rotate-1 hover:rotate-0 transition-transform whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary"
           >
             <span
@@ -248,8 +249,8 @@ const Navbar = () => {
           ))}
 
           <a
-            href={hrefFor("#book")}
-            onClick={(e) => handleClick(e, "#book")}
+            href={hrefFor(BOOK_ANCHOR)}
+            onClick={(e) => handleClick(e, BOOK_ANCHOR)}
             className="relative block w-full text-center mt-5 py-3 font-marker uppercase tracking-wider text-sm bg-[#b3402f] text-[#fdf6e8] border-2 border-[#7a2418] shadow-pinned"
           >
             <span

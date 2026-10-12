@@ -461,8 +461,14 @@ async function checkout(env: Env, request: Request, url: URL): Promise<Response>
       children: stay.children,
       infants: stay.infants,
       pets: stay.pets,
-      // Where OwnerRez sends the guest once the booking is complete.
-      redirectAfterBookingUrl: new URL("/booking-confirmed", url.origin).toString(),
+      // Where OwnerRez sends the guest once the booking is complete. `ref` is a
+      // random per-quote token (not a booking or guest id) that the page sends
+      // to GA4 as transaction_id, so a reload can't double-count the purchase.
+      redirectAfterBookingUrl: (() => {
+        const confirmed = new URL("/booking-confirmed", url.origin);
+        confirmed.searchParams.set("ref", crypto.randomUUID());
+        return confirmed.toString();
+      })(),
     }),
   });
   let quote: { id?: number; paymentForm?: string };

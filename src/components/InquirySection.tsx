@@ -46,7 +46,11 @@ const fieldClass =
   "mt-1 bg-transparent border-0 border-b-2 border-[#2b2520]/25 rounded-none px-1 text-[#2b2520] placeholder:text-[#2b2520]/35 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-secondary";
 const labelClass = "font-hand text-xl text-[#2b2520]/75";
 
-const InquirySection = () => {
+// `embedded` drops the section's own band of vertical padding so the panel can
+// sit inside another section — the hero pins it beside the poster when direct
+// booking is off (see DIRECT_BOOKING_ENABLED in @/lib/features). Either way
+// the panel owns id="inquire".
+const InquirySection = ({ embedded = false }: { embedded?: boolean }) => {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -119,7 +123,11 @@ const InquirySection = () => {
   };
 
   return (
-    <section id="inquire" className="py-16 sm:py-24 px-4 sm:px-6">
+    <section
+      id="inquire"
+      aria-label="Enquire"
+      className={embedded ? "w-full scroll-mt-24" : "py-16 sm:py-24 px-4 sm:px-6"}
+    >
       <div className="max-w-lg mx-auto relative">
         {/* Spiral binding along the top of the notepad */}
         <div aria-hidden="true" className="relative z-10 flex justify-center gap-2.5 -mb-3.5 px-8">

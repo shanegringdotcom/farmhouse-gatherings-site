@@ -12,10 +12,16 @@ import { pushEvent, CONTACT_EMAIL, trackContactClick } from "@/lib/analytics";
 // actual confirmation email with the details.
 const BookingConfirmed = () => {
   useEffect(() => {
-    // GA4 conversion. No value attached — the amount lives with OwnerRez, and
-    // a guest can reload this page, so treating it as a revenue event would
-    // double-count. begin_checkout on the booking form is the paired event.
-    pushEvent("purchase_complete", { form_id: "booking", form_name: "Direct Booking" });
+    // GA4 conversion — `purchase` is the key event GA4 counts. No value
+    // attached; the amount lives with OwnerRez. `ref` is the random token
+    // worker/ownerrez.ts puts on the redirect, sent as transaction_id so GA4
+    // de-duplicates reloads. begin_checkout on the booking form is the paired event.
+    const ref = new URLSearchParams(window.location.search).get("ref");
+    pushEvent("purchase", {
+      form_id: "booking",
+      form_name: "Direct Booking",
+      ...(ref ? { transaction_id: ref } : {}),
+    });
   }, []);
 
   return (

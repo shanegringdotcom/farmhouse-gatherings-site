@@ -297,6 +297,36 @@ const iceCreamGuideJsonLd = [
   },
 ];
 
+// The Indiana lake-rental landing page. Breadcrumb + WebPage only — `about`
+// points at the homepage VacationRental entity rather than redefining it here.
+const lakeRentalJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Lake House Rental in Indiana",
+        item: `${SITE}/indiana-lake-house-rental`,
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE}/indiana-lake-house-rental#webpage`,
+    url: `${SITE}/indiana-lake-house-rental`,
+    name: "Lake House Rental in Indiana, on Big Long Lake",
+    description:
+      "A lake house rental in Indiana on Big Long Lake, Wolcottville — sleeps 12 in 4 bedrooms with a private dock on an all-sports lake. Book direct with no booking fees.",
+    isPartOf: { "@id": `${SITE}/#website` },
+    about: { "@id": `${SITE}/#vacation-rental` },
+    primaryImageOfPage: `${SITE}/images/dock.webp`,
+  },
+];
+
 const aboutJsonLd = [
   {
     "@context": "https://schema.org",
@@ -389,6 +419,14 @@ const routes = [
     description:
       "A guide to ice cream in northern Indiana — 24 shops across LaGrange, Steuben, Noble and Kosciusko counties, including the eight stops on the Steuben County Ice Cream Trail, sorted by distance from the lakes.",
     jsonLd: iceCreamGuideJsonLd,
+  },
+  {
+    path: "/indiana-lake-house-rental",
+    out: "indiana-lake-house-rental.html",
+    title: "Lake House Rental Indiana: Sleeps 12, Private Dock on Big Long Lake",
+    description:
+      "A lake house rental in Indiana on Big Long Lake, Wolcottville — sleeps 12 in 4 bedrooms with a private dock on an all-sports lake. Book direct with no booking fees.",
+    jsonLd: lakeRentalJsonLd,
   },
   {
     // Where OwnerRez returns the guest after payment + e-signature. Flat file
